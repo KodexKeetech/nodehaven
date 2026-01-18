@@ -1,5 +1,5 @@
 import { HNode, Prefab, Animation } from '@hiber3d/hdk-react';
-import { MediaDisplay } from '@hiber3d/hdk-react-components';
+import { MediaDisplay, Spinning } from '@hiber3d/hdk-react-components';
 import { PrefabId } from '@hiber3d/hdk-core';
 
 export const PortalGallery = () => {
@@ -16,7 +16,7 @@ export const PortalGallery = () => {
         />
 
         {/* Animated swirl layer 1 - Outer spiral (slow rotation) */}
-        <Animation animation={[{ rotZ: [0, 360] }]} duration={20} loop>
+        <Spinning axis="z" duration={20} loop="RESTART">
           <Prefab
             id={'simple_donut_01' as PrefabId}
             scale={4.5}
@@ -25,14 +25,13 @@ export const PortalGallery = () => {
             material={{
               color: '#0088ff',
               emissive: '#0088ff',
-              emissiveStrength: 2,
-              opacity: 0.3
+              emissiveStrength: 2
             }}
           />
-        </Animation>
+        </Spinning>
 
         {/* Animated swirl layer 2 - Middle spiral (medium rotation, opposite direction) */}
-        <Animation animation={[{ rotZ: [360, 0] }]} duration={15} loop>
+        <Spinning axis="z" duration={15} direction={-1} loop="RESTART">
           <Prefab
             id={'simple_donut_01' as PrefabId}
             scale={3.8}
@@ -41,14 +40,13 @@ export const PortalGallery = () => {
             material={{
               color: '#00aaff',
               emissive: '#00aaff',
-              emissiveStrength: 2.5,
-              opacity: 0.4
+              emissiveStrength: 2.5
             }}
           />
-        </Animation>
+        </Spinning>
 
         {/* Animated swirl layer 3 - Inner spiral (fast rotation) */}
-        <Animation animation={[{ rotZ: [0, 360] }]} duration={10} loop>
+        <Spinning axis="z" duration={10} loop="RESTART">
           <Prefab
             id={'simple_donut_01' as PrefabId}
             scale={3}
@@ -57,11 +55,10 @@ export const PortalGallery = () => {
             material={{
               color: '#00d9ff',
               emissive: '#00d9ff',
-              emissiveStrength: 3,
-              opacity: 0.5
+              emissiveStrength: 3
             }}
           />
-        </Animation>
+        </Spinning>
 
         {/* Animated swirl particles - Orbiting spheres */}
         {Array.from({ length: 12 }).map((_, i) => {
@@ -71,11 +68,11 @@ export const PortalGallery = () => {
           const z = Math.sin((angle * Math.PI) / 180) * radius;
 
           return (
-            <Animation
+            <Spinning
               key={`particle-${i}`}
-              animation={[{ rotY: [0, 360] }]}
+              axis="y"
               duration={12 - (i % 3)}
-              loop
+              loop="RESTART"
             >
               <HNode y={0.6}>
                 <Prefab
@@ -90,17 +87,17 @@ export const PortalGallery = () => {
                   }}
                 />
               </HNode>
-            </Animation>
+            </Spinning>
           );
         })}
 
-        {/* Energy pulses - Animated scaling rings */}
+        {/* Energy pulse - Animated scaling ring */}
         <Animation
-          animation={[
-            { scale: [2, 5], opacity: [0.8, 0] }
-          ]}
-          duration={3}
-          loop
+          animation={{
+            scale: [2, 5],
+            duration: 3,
+            loop: 'RESTART'
+          }}
         >
           <Prefab
             id={'simple_donut_01' as PrefabId}
@@ -110,20 +107,19 @@ export const PortalGallery = () => {
             material={{
               color: '#ffffff',
               emissive: '#00ffff',
-              emissiveStrength: 4,
-              opacity: 0.8
+              emissiveStrength: 4
             }}
           />
         </Animation>
 
         {/* Second energy pulse (offset timing) */}
         <Animation
-          animation={[
-            { scale: [2, 5], opacity: [0.8, 0] }
-          ]}
-          duration={3}
-          delay={1.5}
-          loop
+          animation={{
+            scale: [2, 5],
+            duration: 3,
+            startAt: 0.5,
+            loop: 'RESTART'
+          }}
         >
           <Prefab
             id={'simple_donut_01' as PrefabId}
@@ -133,8 +129,7 @@ export const PortalGallery = () => {
             material={{
               color: '#ffffff',
               emissive: '#00ddff',
-              emissiveStrength: 4,
-              opacity: 0.8
+              emissiveStrength: 4
             }}
           />
         </Animation>
