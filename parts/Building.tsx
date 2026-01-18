@@ -2,7 +2,7 @@ import { HNode, Prefab, Random } from '@hiber3d/hdk-react';
 import { Avatar, ImagePanel, Portal, SkyScraper, Tween } from '@hiber3d/hdk-react-components';
 import { PrefabId } from '@hiber3d/hdk-core';
 import { useContent } from '../useContent';
-import { Gallery } from './Gallery';
+import { PortalGallery } from './PortalGallery';
 import { Stairs } from './Stairs';
 
 export const Building = () => {
@@ -20,7 +20,7 @@ export const Building = () => {
       <Random seed={2}>
         <SkyScraper y={10} rotY={-90} scale={0.5} theme="cyan" bottom={0} middle={[4, 2]} top={2} />
       </Random>
-      <Gallery />
+      <PortalGallery />
       {content.portal && (
         <HNode x={-4.7} y={55.6} z={6.0} rotY={-60}>
           <Portal worldId={content.portal} />
