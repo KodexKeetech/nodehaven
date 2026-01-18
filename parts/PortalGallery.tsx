@@ -7,11 +7,14 @@ export const PortalGallery = () => {
   const content = useContent();
 
   const portals = [
-    { label: 'NODE', x: -10, media: content.mediaStand[0] },
-    { label: 'Code', x: -5, media: content.mediaStand[1] },
-    { label: 'Free Play', x: 0, media: content.mediaStand[2] },
-    { label: 'Chibie', x: 5, media: content.mediaStand[3] },
-    { label: 'DEFI', x: 10, media: content.mediaStand[5] },
+    { label: 'NODE', x: -15, media: content.mediaStand[0] },
+    { label: 'Code', x: -10, media: content.mediaStand[1] },
+    { label: 'Free Play', x: -5, media: content.mediaStand[2] },
+    { label: 'Chibie', x: 0, media: content.mediaStand[3] },
+    { label: 'DEFI', x: 5, media: content.mediaStand[5] },
+    { label: 'Merch', x: 10, media: content.mediaStand[6] },
+    { label: 'Instagram', x: 15, media: content.mediaStand[7] },
+    { label: 'Twitter', x: 20, media: content.mediaStand[8] },
   ];
 
   return (
@@ -91,11 +94,11 @@ export const PortalGallery = () => {
 
       {/* Floor grid lines */}
       <HNode y={-0.3}>
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 8 }).map((_, i) => (
           <Prefab
             key={`line-${i}`}
             id={'simple_box_01' as PrefabId}
-            x={-10 + i * 5}
+            x={-15 + i * 5}
             scale={[0.02, 0.01, 12]}
             material={{ color: '#00aaff', emissive: '#00aaff', emissiveStrength: 1 }}
           />
