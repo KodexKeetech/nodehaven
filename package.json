@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "hdk dev --open",
+    "build": "echo 'Hiber3D HDK project - no build step required'",
     "upload": "hdk upload",
     "update": "npx update-by-score \"@hiber3d\""
   },
