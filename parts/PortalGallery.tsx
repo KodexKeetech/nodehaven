@@ -15,7 +15,7 @@ export const PortalGallery = () => {
   ];
 
   return (
-    <HNode y={56} z={8} rotY={180}>
+    <HNode y={56} z={0} rotY={0}>
       {portals.map((portal, index) => {
         const media = portal.media as MediaDisplayOptions;
 
@@ -25,79 +25,87 @@ export const PortalGallery = () => {
 
         return (
           <HNode key={index} x={portal.x}>
+            {/* Bright marker sphere to confirm visibility */}
+            <Prefab
+              id={'simple_sphere_01' as PrefabId}
+              scale={0.5}
+              y={4}
+              material={{ color: '#ff0000', emissive: '#ff0000', emissiveStrength: 10 }}
+            />
+
             {/* Portal outer ring */}
             <Prefab
               id={'simple_donut_01' as PrefabId}
-              scale={2.8}
+              scale={3.5}
               rotX={90}
               y={0}
-              material={{ color: '#00d9ff', emissive: '#00d9ff', emissiveStrength: 3 }}
+              material={{ color: '#00d9ff', emissive: '#00d9ff', emissiveStrength: 5 }}
             />
 
             {/* Portal middle ring */}
             <Prefab
               id={'simple_donut_01' as PrefabId}
-              scale={2.4}
+              scale={3}
               rotX={90}
               y={0.1}
-              material={{ color: '#0099ff', emissive: '#0099ff', emissiveStrength: 4 }}
+              material={{ color: '#0099ff', emissive: '#0099ff', emissiveStrength: 6 }}
             />
 
-            {/* Portal inner glow */}
+            {/* Portal inner background */}
             <Prefab
               id={'simple_disc_01' as PrefabId}
-              scale={2}
+              scale={2.5}
               rotX={90}
               y={0.15}
-              material={{ color: '#004466', emissive: '#0066aa', emissiveStrength: 2 }}
+              material={{ color: '#001133', emissive: '#0044aa', emissiveStrength: 3 }}
             />
 
             {/* Content display inside portal */}
             <MediaDisplay
               y={0.2}
-              scale={1.4}
-              rotY={180}
+              scale={1.8}
               {...media}
-              emissiveStrength={(media.emissiveStrength || 0) + 0.8}
+              emissiveStrength={(media.emissiveStrength || 0) + 1.2}
               muted
             />
 
-            {/* Portal frame decoration */}
+            {/* Vertical frame pillars */}
             <Prefab
-              id={'simple_tube_01' as PrefabId}
-              scale={[0.1, 3, 0.1]}
-              x={-2.2}
+              id={'simple_box_01' as PrefabId}
+              scale={[0.15, 4, 0.15]}
+              x={-3}
               y={0}
-              material={{ color: '#00ffff', emissive: '#00ffff', emissiveStrength: 2 }}
+              material={{ color: '#00ffff', emissive: '#00ffff', emissiveStrength: 4 }}
             />
             <Prefab
-              id={'simple_tube_01' as PrefabId}
-              scale={[0.1, 3, 0.1]}
-              x={2.2}
+              id={'simple_box_01' as PrefabId}
+              scale={[0.15, 4, 0.15]}
+              x={3}
               y={0}
-              material={{ color: '#00ffff', emissive: '#00ffff', emissiveStrength: 2 }}
+              material={{ color: '#00ffff', emissive: '#00ffff', emissiveStrength: 4 }}
             />
 
-            {/* Light orbs */}
+            {/* Top light marker */}
             <Prefab
               id={'simple_sphere_01' as PrefabId}
-              scale={0.15}
-              y={2.5}
-              material={{ color: '#ffffff', emissive: '#00ffff', emissiveStrength: 5 }}
+              scale={0.3}
+              y={3}
+              material={{ color: '#ffffff', emissive: '#00ffff', emissiveStrength: 8 }}
             />
           </HNode>
         );
       })}
 
-      {/* Floor grid lines */}
-      <HNode y={-0.3}>
+      {/* Bright floor markers */}
+      <HNode y={-0.2}>
         {Array.from({ length: 5 }).map((_, i) => (
           <Prefab
-            key={`line-${i}`}
-            id={'simple_box_01' as PrefabId}
+            key={`floor-${i}`}
+            id={'simple_disc_01' as PrefabId}
             x={-10 + i * 5}
-            scale={[0.02, 0.01, 12]}
-            material={{ color: '#00aaff', emissive: '#00aaff', emissiveStrength: 1 }}
+            rotX={90}
+            scale={0.5}
+            material={{ color: '#00ffff', emissive: '#00ffff', emissiveStrength: 3 }}
           />
         ))}
       </HNode>
