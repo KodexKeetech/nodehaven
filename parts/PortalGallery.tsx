@@ -147,16 +147,6 @@ export const PortalGallery = () => {
           }}
         />
       </HNode>
-
-      {/* Floor grid line (single line under portal) */}
-      <HNode y={-0.3}>
-        <Prefab
-          id={'simple_cube_01' as PrefabId}
-          x={0}
-          scale={[0.03, 0.01, 12]}
-          material={{ color: '#00aaff', emissive: '#00aaff', emissiveStrength: 1.5 }}
-        />
-      </HNode>
     </HNode>
   );
 };
