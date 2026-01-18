@@ -1,4 +1,4 @@
-import { HNode, Prefab, TextPanel } from '@hiber3d/hdk-react';
+import { HNode, Prefab } from '@hiber3d/hdk-react';
 import { MediaDisplay, MediaDisplayOptions } from '@hiber3d/hdk-react-components';
 import { PrefabId } from '@hiber3d/hdk-core';
 import { useContent } from '../useContent';
@@ -7,15 +7,15 @@ export const PortalGallery = () => {
   const content = useContent();
 
   const portals = [
-    { label: 'NODE', x: -12, media: content.mediaStand[0] },
-    { label: 'Code', x: -6, media: content.mediaStand[1] },
+    { label: 'NODE', x: -10, media: content.mediaStand[0] },
+    { label: 'Code', x: -5, media: content.mediaStand[1] },
     { label: 'Free Play', x: 0, media: content.mediaStand[2] },
-    { label: 'Chibie!', x: 6, media: content.mediaStand[3] },
-    { label: 'DEFI', x: 12, media: content.mediaStand[5] },
+    { label: 'Chibie', x: 5, media: content.mediaStand[3] },
+    { label: 'DEFI', x: 10, media: content.mediaStand[5] },
   ];
 
   return (
-    <HNode y={56} z={15} rotY={180}>
+    <HNode y={56} z={8} rotY={180}>
       {portals.map((portal, index) => {
         const media = portal.media as MediaDisplayOptions;
 
@@ -25,87 +25,79 @@ export const PortalGallery = () => {
 
         return (
           <HNode key={index} x={portal.x}>
-            {/* Portal outer ring - glowing cyan effect */}
+            {/* Portal outer ring */}
             <Prefab
-              id={'gpl_booster_plate_03' as PrefabId}
-              scale={2.5}
+              id={'simple_donut_01' as PrefabId}
+              scale={2.8}
               rotX={90}
               y={0}
-              material={{ color: '#00d9ff', emissive: '#00d9ff', emissiveStrength: 2 }}
+              material={{ color: '#00d9ff', emissive: '#00d9ff', emissiveStrength: 3 }}
             />
 
-            {/* Portal inner ring */}
+            {/* Portal middle ring */}
             <Prefab
-              id={'gpl_booster_plate_03' as PrefabId}
-              scale={2.2}
+              id={'simple_donut_01' as PrefabId}
+              scale={2.4}
               rotX={90}
               y={0.1}
-              material={{ color: '#0088ff', emissive: '#0088ff', emissiveStrength: 3 }}
+              material={{ color: '#0099ff', emissive: '#0099ff', emissiveStrength: 4 }}
             />
 
-            {/* Portal core glow */}
+            {/* Portal inner glow */}
             <Prefab
-              id={'gpl_booster_plate_03' as PrefabId}
-              scale={1.8}
+              id={'simple_disc_01' as PrefabId}
+              scale={2}
               rotX={90}
-              y={0.2}
-              material={{ color: '#ffffff', emissive: '#88ddff', emissiveStrength: 1 }}
+              y={0.15}
+              material={{ color: '#004466', emissive: '#0066aa', emissiveStrength: 2 }}
             />
 
             {/* Content display inside portal */}
             <MediaDisplay
-              y={0.3}
-              scale={1.5}
+              y={0.2}
+              scale={1.4}
+              rotY={180}
               {...media}
-              emissiveStrength={(media.emissiveStrength || 0) + 0.5}
+              emissiveStrength={(media.emissiveStrength || 0) + 0.8}
               muted
             />
 
-            {/* Portal label at the top */}
-            <TextPanel
-              text={portal.label}
-              y={3.5}
-              scale={0.4}
-              fontSize={120}
-              fontWeight={700}
-              material={{ color: '#00ffff', emissive: '#00ffff', emissiveStrength: 1.5 }}
+            {/* Portal frame decoration */}
+            <Prefab
+              id={'simple_tube_01' as PrefabId}
+              scale={[0.1, 3, 0.1]}
+              x={-2.2}
+              y={0}
+              material={{ color: '#00ffff', emissive: '#00ffff', emissiveStrength: 2 }}
+            />
+            <Prefab
+              id={'simple_tube_01' as PrefabId}
+              scale={[0.1, 3, 0.1]}
+              x={2.2}
+              y={0}
+              material={{ color: '#00ffff', emissive: '#00ffff', emissiveStrength: 2 }}
             />
 
-            {/* Accent lights around portal */}
+            {/* Light orbs */}
             <Prefab
-              id={'gpl_light_01' as PrefabId}
-              y={0}
-              scale={0.8}
-              material={{ color: '#00d9ff', emissive: '#00d9ff', emissiveStrength: 3 }}
+              id={'simple_sphere_01' as PrefabId}
+              scale={0.15}
+              y={2.5}
+              material={{ color: '#ffffff', emissive: '#00ffff', emissiveStrength: 5 }}
             />
           </HNode>
         );
       })}
 
-      {/* Ground grid effect */}
-      <HNode y={-0.5}>
-        {Array.from({ length: 7 }).map((_, i) => (
+      {/* Floor grid lines */}
+      <HNode y={-0.3}>
+        {Array.from({ length: 5 }).map((_, i) => (
           <Prefab
-            key={`grid-x-${i}`}
-            id={'showcase_scifi_arrow_01' as PrefabId}
-            x={-15 + i * 5}
-            z={0}
-            rotY={0}
-            scaleX={0.5}
-            scaleZ={30}
-            material={{ color: '#00aaff', emissive: '#00aaff', emissiveStrength: 0.5 }}
-          />
-        ))}
-        {Array.from({ length: 11 }).map((_, i) => (
-          <Prefab
-            key={`grid-z-${i}`}
-            id={'showcase_scifi_arrow_01' as PrefabId}
-            x={0}
-            z={-15 + i * 3}
-            rotY={90}
-            scaleX={0.5}
-            scaleZ={30}
-            material={{ color: '#00aaff', emissive: '#00aaff', emissiveStrength: 0.3 }}
+            key={`line-${i}`}
+            id={'simple_box_01' as PrefabId}
+            x={-10 + i * 5}
+            scale={[0.02, 0.01, 12]}
+            material={{ color: '#00aaff', emissive: '#00aaff', emissiveStrength: 1 }}
           />
         ))}
       </HNode>
