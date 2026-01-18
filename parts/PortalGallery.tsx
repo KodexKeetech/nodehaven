@@ -151,7 +151,7 @@ export const PortalGallery = () => {
       {/* Floor grid line (single line under portal) */}
       <HNode y={-0.3}>
         <Prefab
-          id={'simple_box_01' as PrefabId}
+          id={'simple_cube_01' as PrefabId}
           x={0}
           scale={[0.03, 0.01, 12]}
           material={{ color: '#00aaff', emissive: '#00aaff', emissiveStrength: 1.5 }}
